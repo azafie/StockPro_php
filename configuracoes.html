@@ -1,0 +1,147 @@
+<!doctype html><html lang="pt-br">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StockPro · Configurações</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/app.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Topbar -->
+  <nav class="navbar navbar-expand-lg topbar">
+    <div class="container-fluid">
+      <button class="btn btn-outline-secondary d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar"><i class="bi bi-list"></i></button>
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html"><img src="assets/img/logo.svg" class="logo-mini" alt=""><span class="brand">StockPro</span></a>
+      <ul class="navbar-nav ms-auto"><li class="nav-item"><button class="btn btn-link nav-link" id="themeToggle"><i class="bi bi-moon"></i></button></li></ul>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <div class="offcanvas offcanvas-start offcanvas-lg sidebar" tabindex="-1" id="offcanvasSidebar">
+    <div class="offcanvas-body p-0">
+      <div class="accordion" id="sidebarAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#sisCollapse" aria-expanded="true"><i class="bi bi-gear me-2"></i>Sistema</button></h2>
+          <div id="sisCollapse" class="accordion-collapse collapse show"><div class="accordion-body">
+            <nav class="nav flex-column small">
+              <a class="nav-link" href="usuarios.html">Usuários</a>
+              <a class="nav-link active" href="configuracoes.html">Configurações</a>
+            </nav>
+          </div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#estqCollapse"><i class="bi bi-box-seam me-2"></i>Estoque</button></h2>
+          <div id="estqCollapse" class="accordion-collapse collapse"><div class="accordion-body">
+            <nav class="nav flex-column small">
+              <a class="nav-link" href="index.html">Dashboard</a>
+              <a class="nav-link" href="produtos.html">Produtos</a>
+              <a class="nav-link" href="categorias.html">Categorias</a>
+              <a class="nav-link" href="movimentacoes.html">Movimentações</a>
+              <a class="nav-link" href="inventario.html">Inventário</a>
+            </nav>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="content-wrapper">
+    <!-- INCLUDE: PAGE_CONTENT_START -->
+    <div class="container-fluid">
+      <h1 class="h4 mb-3">Configurações</h1>
+
+      <div class="card card-soft">
+        <div class="card-header bg-transparent">
+          <ul class="nav nav-tabs card-header-tabs" id="tabsSettings" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="tab-geral" data-bs-toggle="tab" data-bs-target="#pane-geral" type="button" role="tab">Geral</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-produtos" data-bs-toggle="tab" data-bs-target="#pane-produtos" type="button" role="tab">Produtos</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-notific" data-bs-toggle="tab" data-bs-target="#pane-notific" type="button" role="tab">Notificações</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-tema" data-bs-toggle="tab" data-bs-target="#pane-tema" type="button" role="tab">Tema</button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <!-- INCLUDE: SETTINGS -->
+          <div class="tab-content">
+            <!-- Geral -->
+            <div class="tab-pane fade show active" id="pane-geral" role="tabpanel">
+              <form class="row g-3">
+                <div class="col-md-6"><label class="form-label">Nome da empresa</label><input class="form-control" value="Minha Empresa Ltda."></div>
+                <div class="col-md-3"><label class="form-label">Fuso horário</label>
+                  <select class="form-select"><option>America/Sao_Paulo (GMT-3)</option><option>UTC</option></select>
+                </div>
+                <div class="col-md-3"><label class="form-label">Locale</label>
+                  <select class="form-select"><option>pt-BR</option><option>en-US</option></select>
+                </div>
+                <div class="col-12 text-end"><button type="button" class="btn btn-primary" onclick="showToast('Configurações gerais salvas','success')">Salvar</button></div>
+              </form>
+            </div>
+
+            <!-- Produtos -->
+            <div class="tab-pane fade" id="pane-produtos" role="tabpanel">
+              <form class="row g-3">
+                <div class="col-md-4"><label class="form-label">Unidade padrão</label>
+                  <select class="form-select"><option>un</option><option>kg</option><option>lt</option></select>
+                </div>
+                <div class="col-md-4"><label class="form-label">Estoque mínimo padrão</label><input type="number" class="form-control" value="5"></div>
+                <div class="col-md-4"><label class="form-label">Preço com 2 decimais</label>
+                  <select class="form-select"><option>Sim</option><option>Não</option></select>
+                </div>
+                <div class="col-12 text-end"><button type="button" class="btn btn-primary" onclick="showToast('Configurações de produtos salvas','success')">Salvar</button></div>
+              </form>
+            </div>
+
+            <!-- Notificações -->
+            <div class="tab-pane fade" id="pane-notific" role="tabpanel">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swToast" checked>
+                    <label class="form-check-label" for="swToast">Toasts de sucesso/erro</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swEmail">
+                    <label class="form-check-label" for="swEmail">Notificar por e-mail (placeholder)</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">E-mail de suporte</label>
+                  <input class="form-control" placeholder="suporte@empresa.com">
+                </div>
+                <div class="col-12 text-end"><button type="button" class="btn btn-primary" onclick="showToast('Preferências de notificações salvas','success')">Salvar</button></div>
+              </div>
+            </div>
+
+            <!-- Tema -->
+            <div class="tab-pane fade" id="pane-tema" role="tabpanel">
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <p class="mb-1">Tema do sistema</p>
+                  <small class="text-secondary">Alterne entre claro e escuro. Preferência fica salva no navegador.</small>
+                </div>
+                <button id="themeToggle" class="btn btn-outline-secondary"><i class="bi bi-moon"></i> Alternar tema</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- INCLUDE: PAGE_CONTENT_END -->
+  </main>
+
+  <footer class="footer d-flex align-items-center px-3 justify-content-between">
+    <small>© 2025 StockPro · v1.0 · <a href="#" class="text-decoration-none">Suporte</a></small>
+    <small><a href="#" class="text-decoration-none">Privacidade</a></small>
+  </footer>
+
+  <div id="toastContainer"></div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.n

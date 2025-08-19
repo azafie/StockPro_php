@@ -1,0 +1,104 @@
+/* =============================================
+   StockPro — estilos custom
+   ============================================= */
+:root {
+  --sp-primary: #0d6efd;
+  --sp-secondary: #6c757d;
+  --sp-bg: #f8f9fa;
+  --sp-text: #212529;
+  --sp-sidebar-bg: #ffffff;
+  --sp-topbar-bg: #ffffff;
+  --sp-card-bg: #ffffff;
+}
+
+html.dark-theme {
+  --sp-bg: #0f1216;
+  --sp-text: #e9ecef;
+  --sp-sidebar-bg: #151a21;
+  --sp-topbar-bg: #151a21;
+  --sp-card-bg: #1a2028;
+}
+
+body {
+  background: var(--sp-bg);
+  color: var(--sp-text);
+}
+
+/* Topbar */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1031;
+  background: var(--sp-topbar-bg);
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+.search-icon { position: absolute; left: .75rem; top: 50%; transform: translateY(-50%); opacity:.6; }
+.search-input { padding-left: 2rem; }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  width: 280px;
+  height: calc(100% - 56px);
+  overflow-y: auto;
+  background: var(--sp-sidebar-bg);
+  border-right: 1px solid rgba(0,0,0,.06);
+}
+.sidebar .nav-link { color: inherit; }
+.sidebar .nav-link:hover { background: rgba(0,0,0,.04); }
+.sidebar .nav-link.active { background: rgba(13,110,253,.1); color: var(--sp-primary); font-weight: 600; }
+.sidebar .accordion-button { background: transparent; padding: .6rem 1rem; }
+.sidebar .accordion-button:not(.collapsed){ color: var(--sp-primary); background: rgba(13,110,253,.06); }
+.sidebar .accordion-body { padding: .25rem .5rem .5rem; }
+
+/* Conteúdo */
+.content-wrapper {
+  padding: 1.5rem;
+  margin-left: 280px;
+  min-height: calc(100vh - 56px - 48px);
+}
+
+/* Footer */
+.footer {
+  background: transparent;
+  color: inherit;
+  border-top: 1px solid rgba(0,0,0,.08);
+  height: 48px;
+}
+
+/* Cards */
+.card-soft {
+  background: var(--sp-card-bg);
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 8px 24px rgba(0,0,0,.05);
+}
+
+/* Tabelas */
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--sp-card-bg);
+  z-index: 1;
+}
+
+/* Offcanvas desktop fixo */
+@media (min-width: 992px){
+  .offcanvas-lg {
+    position: static;
+    width: 280px;
+    border: 0;
+    transform: none !important;
+    visibility: visible !important;
+  }
+  .offcanvas-backdrop { display:none; }
+}
+@media (max-width: 991.98px){
+  .content-wrapper { margin-left: 0; }
+}
+
+/* Utilidades */
+.logo-mini { width: 28px; height: 28px; }
+.brand { font-weight: 700; letter-spacing:.2px; }
+#toastContainer { position: fixed; right: 1rem; bottom: 1rem; z-index: 1080; }
