@@ -1,181 +1,188 @@
-# StockPro – Frontend estático
-Sistema de gerenciamento de estoque (somente client-side) usando **HTML5, CSS3, Bootstrap 5, Bootstrap Icons e jQuery** via CDN.  
-Sem bundlers, sem SPA, sem server-side rendering. Arquivos prontos para hospedar.
+
+# 📊 **StockPro - Sistema de Gestão de Estoque**
+
+**StockPro** é um sistema de gerenciamento de estoque feito **sem o uso de frameworks**, utilizando apenas **PHP**, **HTML5**, **CSS3** e **JavaScript**. O objetivo é criar uma aplicação simples, eficiente e sustentável, que seja fácil de manter e escalar ao longo do tempo. A escolha por tecnologias modernas e bem estabelecidas garante que o sistema seja **sustentável** e compatível com as melhores práticas da indústria.
 
 ---
 
-## 📁 Estrutura
+## 🚀 **Funcionalidades**
+
+- **CRUD de Produtos**:
+  - Adicionar, editar e excluir produtos
+  - Exibição de lista de produtos com informações detalhadas (SKU, nome, categoria, preço, estoque e status)
+  - Filtros e busca por nome, código, categoria e status
+
+- **Interface Intuitiva**:
+  - Modal para criação e edição de produtos
+  - Máscaras de moeda para preço
+  - Badges de status (Ativo/Inativo) para identificação rápida
+
+- **Persistência de Dados**:
+  - **localStorage** (temporário) para manter os dados entre as sessões do navegador
+
+- **Arquitetura Modular**:
+  - Código separado por responsabilidades, facilitando manutenção e expansão
+  - Baseada em **JavaScript (ES6+), HTML5, CSS3**, e uso do **Bootstrap** para a interface.
+
+---
+
+## 🛠️ **Tecnologias Utilizadas**
+
+- **Frontend**:
+    - **HTML5** (sem uso de frameworks)
+    - **CSS3** (com **Bootstrap** para layout responsivo, sem uso de frameworks pesados)
+    - **JavaScript (ES6+)**
+    - **jQuery 3.7.1** (para manipulação de DOM e eventos)
+
+- **Backend (Futuro)**:
+    - **PHP** (sem frameworks pesados, apenas código puro)
+    - **MySQL/PostgreSQL** (dependendo da configuração futura)
+
+- **Armazenamento**:
+    - **localStorage** para persistência temporária dos dados (para testes e protótipos)
+
+---
+
+## ⚙️ **Arquitetura do Sistema**
+
+O sistema é projetado de maneira simples e eficiente, sem a necessidade de frameworks pesados. A arquitetura é modular, e os dados são armazenados localmente enquanto a integração com o backend está planejada para o futuro.
+
+### **Estrutura Atual**:
+
 ```
-/assets/
-  /css/
-    app.css
-  /js/
-    app.js
-  /img/
-    logo.svg
-index.html
-produtos.html
-categorias.html
-fornecedores.html
-compras.html
-vendas.html
-clientes.html
-movimentacoes.html
-inventario.html
-relatorios.html
-usuarios.html
-configuracoes.html
-login.html
-recuperar.html
-404.html
-```
+┌─────────────────────────────────────────────────────────────┐
+│                        FRONTEND (Cliente)                    │
+├─────────────────────────────────────────────────────────────┤
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
+│  │   HTML/CSS   │  │  JavaScript  │  │   Bootstrap  │      │
+│  │   (Views)    │  │   (Lógica)   │  │     (UI)     │      │
+│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│                                                               │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │                  StockPro Core                      │     │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────────┐    │     │
+│  │  │   core   │  │   utils  │  │   produtos    │    │     │
+│  │  │    .js   │  │    .js   │  │  _core.js    │    │     │
+│  │  └──────────┘  └──────────┘  └──────────────┘    │     │
+│  └────────────────────────────────────────────────────┘     │
+│                                                               │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │                    UI Modules                       │     │
+│  │  ┌──────────────┐  ┌──────────────┐               │     │
+│  │  │  produtos    │  │   (futuro)   │               │     │
+│  │  │   _ui.js     │  │  categorias  │               │     │
+│  │  └──────────────┘  └──────────────┘               │     │
+│  └────────────────────────────────────────────────────┘     │
+│                                                               │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │              Armazenamento Local                    │     │
+│  │                 (localStorage)                      │     │
+│  │  ┌──────────────────────────────────────────┐    │     │
+│  │  │  Key: stockpro_produtos                   │    │     │
+│  │  │  Value: JSON Array de Produtos            │    │     │
+│  │  └──────────────────────────────────────────┘    │     │
+└─────────────────────────────────────────────────────────────┘
 
-**CDNs (usar em todas as páginas):**
-```html
-<!-- HEAD -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link href="assets/css/app.css" rel="stylesheet">
+                            ⬇️ (Futura Integração)
 
-<!-- Antes de </body> -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/app.js"></script>
-```
-
----
-
-## 🚀 Como rodar localmente
-1. Baixe/clon(e) os arquivos.
-2. Abra **`login.html`** ou **`index.html`** no navegador (duplo clique).  
-   > Não há build. Funciona direto do filesystem.
-3. Opcional: sirva com um HTTP estático (para simular produção):
-   - Python: `python -m http.server 8080`
-   - Node: `npx http-server -p 8080`
-4. Acesse `http://localhost:8080`.
-
----
-
-## 🌗 Tema (dark mode)
-- Botão na topbar com `id="themeToggle"`.
-- Preferência persistida em `localStorage` (`sp-theme = 'light' | 'dark'`).
-- Classe aplicada no `<html>`: `.dark-theme`.
-- Paleta e superfícies controladas por **CSS Custom Properties** em `assets/css/app.css`.
-
----
-
-## 🧭 Layout e Navegação
-- **Topbar** fixa (classe `.topbar`) com campo de busca, ícones e menu usuário.
-- **Sidebar** sanfona/accordion com **offcanvas** no mobile:  
-  - `<992px`: abre/fecha como offcanvas.  
-  - `≥992px`: fica fixa à esquerda (CSS ajusta `offcanvas-lg`).
-- **Conteúdo** dentro de `<main class="content-wrapper">`.
-- **Rodapé** simples com versão e links.
-
-**Ativar item atual da sidebar:**  
-em cada página, aponte a classe `.active` no link correspondente (já feito nos HTMLs de exemplo).
-
----
-
-## 🔌 Slots de INCLUDE (back-end)
-Cada página tem um bloco padrão:
-```html
-<!-- INCLUDE: PAGE_CONTENT_START -->
-<!-- (o back-end irá injetar conteúdo aqui via include/partial) -->
-<!-- INCLUDE: PAGE_CONTENT_END -->
-```
-E **placeholders específicos** por página, por exemplo:
-- `produtos.html` → `<!-- INCLUDE: PRODUTOS_LIST -->`
-- `categorias.html` → `<!-- INCLUDE: CATEGORIAS_LIST -->`
-- `fornecedores.html` → `<!-- INCLUDE: FORNECEDORES_LIST -->`
-- `compras.html` → `<!-- INCLUDE: COMPRAS_LIST -->`
-- `vendas.html` → `<!-- INCLUDE: VENDAS_LIST -->`
-- `clientes.html` → `<!-- INCLUDE: CLIENTES_LIST -->`
-- `movimentacoes.html` → `<!-- INCLUDE: MOVS_LIST -->`
-- `inventario.html` → `<!-- INCLUDE: INVENTARIO_WIZARD -->`
-- `relatorios.html` → `<!-- INCLUDE: RELATORIOS -->`
-- `usuarios.html` → `<!-- INCLUDE: USERS_LIST -->`
-- `configuracoes.html` → `<!-- INCLUDE: SETTINGS -->`
-
-> **Observação:** Os includes são **comentários** HTML para orientar a injeção. No back-end, substitua/insira HTML nesses pontos.
-
-### Exemplos de integração
-**PHP (include simples):**
-```php
-<?php include __DIR__ . '/partials/produtos_list.php'; ?>
+┌─────────────────────────────────────────────────────────────┐
+│                        BACKEND (Servidor)                    │
+├─────────────────────────────────────────────────────────────┤
+│  ┌────────────────┐  ┌─────────────┐  ┌──────────────┐    │
+│  │   API REST     │  │   PHP/Node  │  │   MySQL/     │    │
+│  │   (Futuro)     │  │   (Futuro)  │  │   PostgreSQL │    │
+│  └────────────────┘  └─────────────┘  └──────────────┘    │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**Node (Express + EJS):**
-```ejs
-<!-- INCLUDE: PRODUTOS_LIST -->
-<%- include('partials/produtos_list'); %>
-```
+---
 
-**Python (Flask + Jinja2):**
-```jinja2
-{# INCLUDE: PRODUTOS_LIST #}
-{% include 'partials/produtos_list.html' %}
-```
+## 🛠️ **Instalação e Execução**
 
-**Dica:** mantenha o HTML gerado **sem dependências adicionais**; Bootstrap já está disponível.
+### **Passos para rodar localmente**:
+
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/stockpro.git
+    ```
+
+2. Navegue até a pasta do projeto:
+    ```bash
+    cd stockpro
+    ```
+
+3. Abra o arquivo `index.html` em seu navegador:
+    - O sistema não necessita de servidor PHP no momento. Porém, para futuras versões, será necessário um servidor local com PHP.
 
 ---
 
-## ✅ Validações & UX
-- **jQuery** apenas para:
-  - Alternar tema (dark/light).
-  - Inicializar tooltips/toasts do Bootstrap.
-  - Feedbacks rápidos via `showToast(msg, type)`.
-  - Pequenas validações client-side (ex.: campos `required` + classes `is-invalid` se desejar estender).
-- **Acessibilidade:**
-  - `aria-label` em ícones acionáveis.
-  - `aria-expanded` nos botões da sanfona.
-  - Foco visível padrão do Bootstrap.
-  - Não usar apenas cor para feedback (badges/ícones/texto ajudam).
+## 📝 **Próximos Passos**
+
+### **Fase 1: Módulos Básicos** 🎯
+- Implementação de **Categorias** para os produtos.
+- **Movimentações de Estoque**: Entrada e saída de produtos.
+- **Fornecedores**: Cadastro de fornecedores e vinculação com produtos.
+
+### **Fase 2: Backend e API** 🔌
+- Criar a **API REST** para comunicação com o backend:
+  - **GET** para listar produtos
+  - **POST** para criar produtos
+  - **PUT** para editar produtos
+  - **DELETE** para excluir produtos
+
+### **Fase 3: Recursos Avançados** 🚀
+- Adicionar **gráficos** e relatórios.
+- Implementar **login** e **permissões** para usuários.
+- **Exportação e Importação** de dados (Excel, CSV).
 
 ---
 
-## 🧰 Padrões de Tabela e Form
-- Tabelas: `table table-hover table-striped align-middle`, cabeçalho sticky.
-- Ações: botões `btn-sm` com ícones `Bootstrap Icons`.
-- Form em modais com campos `required` quando aplicável.
-- Filtros sempre no topo com `row g-2`.
+## 🔧 **Comandos Úteis**
+
+- Para verificar os produtos armazenados no **localStorage**, use o seguinte comando no **Console do navegador**:
+    ```javascript
+    JSON.parse(localStorage.getItem('stockpro_produtos'))
+    ```
+
+- Para adicionar um novo produto via console, use:
+    ```javascript
+    window.StockPro.produtos.criar({
+        codigo: 'SKU-001',
+        nome: 'Produto Teste',
+        preco: 100.00,
+        status: 'ATIVO'
+    })
+    ```
+
+- Para limpar os dados armazenados:
+    ```javascript
+    localStorage.clear()
+    ```
 
 ---
 
-## 🔔 Toast helper
-Disponível em `assets/js/app.js`:
-```js
-showToast('Mensagem aqui', 'success'); // types: primary, success, danger, warning, info...
-```
-Container automático `#toastContainer` é criado se não existir.
+## 🐛 **Problemas Conhecidos**
+
+1. **Paginação não implementada**: Todos os produtos são exibidos de uma vez.
+2. **Validação de estoque negativo não realizada**: Permite estoque negativo.
+3. **Sem backup automático**: Os dados são salvos apenas no **localStorage**, o que pode ser perdido se o cache for limpo.
 
 ---
 
-## 🎯 Checklist de produção
-- [ ] Conferir **links relativos** da sidebar/topbar.
-- [ ] Trocar logo em `assets/img/logo.svg` se desejar.
-- [ ] Revisar textos dummy (cards, tabelas, modais).
-- [ ] Marcar item **.active** da sidebar em cada página.
-- [ ] Verificar contraste no **dark mode** para sua paleta/branding.
-- [ ] Habilitar HTTPS e cache estático no host (CDNs já otimizam).
+## 📅 **Versões Futuras**
+
+- **Versão 2.0**: Implementação do **backend** (API REST).
+- **Versão 3.0**: Dashboard com gráficos, relatórios e funcionalidades avançadas.
 
 ---
 
-## 🐞 Dicas & Problemas comuns
-1. **Sidebar sobrepondo topbar no mobile**  
-   → Garanta a estrutura idêntica dos arquivos (topbar antes do offcanvas) e o CSS de `@media` existente em `app.css`.
+## 💬 **Contato e Suporte**
 
-2. **Tooltip não aparece**  
-   → Elementos precisam do atributo `data-bs-toggle="tooltip"` e o JS do Bootstrap (bundle) deve estar carregado **após** jQuery. `app.js` inicializa automaticamente.
+**Projeto:** StockPro - Sistema de Gestão de Estoque  
+**Versão:** 1.0.0  
+**Última Atualização:** Janeiro 2025  
+**Status:** Em desenvolvimento ativo  
 
-3. **Preferência de tema não persiste**  
-   → Verifique se o navegador permite `localStorage` (modo privado restrito) e se o `id="themeToggle"` existe na página.
+--- 
 
-4. **Tabelas “saltando” no cabeçalho sticky**  
-   → A classe do thead já define fundo. Evite colocar o thead fora do `.table-responsive`.
-
----
-
-## 🧾 Licença
-Uso interno/privado livre. Ajuste conforme sua necessidade.
+**FIM DO RELATÓRIO**
